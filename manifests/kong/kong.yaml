@@ -1,0 +1,23 @@
+_format_version: "3.0"
+_info:
+  version: "1.0"
+  description: "Kong Gateway configuration for dev environment"
+
+services:
+  - name: dev-api-service
+    url: https://dev.example.com
+    routes:
+      - name: dev-api-route
+        paths:
+          - /api/dev
+        strip_path: true
+        methods:
+          - GET
+          - POST
+
+plugins:
+  - name: rate-limiting
+    service: dev-api-service
+    config:
+      minute: 100
+      policy: local
